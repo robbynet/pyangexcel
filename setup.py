@@ -1,0 +1,24 @@
+import os
+from setuptools import find_packages, setup
+
+
+def read(fname):
+    return open(os.path.join(os.path.dirname(__file__), fname)).read()
+
+
+setup(
+    name='pyangexcel',
+    version='0.1',
+    description=('A pyang excel plugin to produce a Excel Schema file'),
+    long_description=read('README.md'),
+    packages=['pyangexcel'],
+    author='neoul',
+    author_email='neoul@ymail.com',
+    license='Apache License',
+    url='https://github.com/neoul/pyang-excel-plugin',
+    install_requires=['pyang', 'openpyxl'],
+    include_package_data=True,
+    keywords=['pyang', 'yang'],
+    zip_safe=False,
+    classifiers=[],
+)
