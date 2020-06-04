@@ -589,6 +589,13 @@ def get_typename(s):
     else:
         return ''
 
+
+def split_identifier(identifier):
+    idx = identifier.find(":")
+    if idx == -1:
+        return None, identifier
+    return identifier[:idx], identifier[idx + 1:]
+
 def typestring(node):
 
     def get_nontypedefstring(node):
@@ -646,7 +653,10 @@ def typestring(node):
         # chase typedef
         type_namespace = None
         i_type_name = None
-        prefix, name = util.split_identifier(t.arg)
+        try:
+            prefix, name = util.split_identifier(t.arg)
+        except:
+            prefix, name = split_identifier(t.arg)
         if prefix is None or t.i_module.i_prefix == prefix:
             # check local typedefs
             pmodule = node.i_module
