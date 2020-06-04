@@ -1,44 +1,46 @@
-module test-include-module {
-    namespace "urn:include-module";
-    prefix incl;
+submodule test-include-module {
+    // namespace "urn:include-module";
+    // prefix incl;
 
-    organization
-      "";
+	belongs-to "test-module" {
+		prefix "test";
+	}
 
-    contact
-      "";
 
-    description
-      "";
+    // organization
+    //   "organization info.";
 
-    revision  {
-      description
-        "";
-      reference
-        "";
-    }
+    // contact
+    //   "neoul@ymail.com";
 
-    container top {
+    // description
+    //   "The module description for included YANG.";
+
+    // revision 2016-08-16 {
+    //   description
+    //     "revision description";
+    //   reference
+    //     "0.0.1";
+    // }
+
+    container included-top {
     	description
-    		"";
-    	list  {
+    		"This is top module";
+    	list listnode {
     		key "akey";
-    	
     		description
-    			"";
+    			"List nodes of the included-top";
     	
     		leaf akey {
     			type string;
-    	
     			description
-    				"";
+    				"The key of the listnode";
     		}
 
     		leaf aleaf {
     			type string;
-    		
     			description
-    				"";
+    				"The leaf of the listnode";
     		}
     	}
     }

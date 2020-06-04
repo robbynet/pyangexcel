@@ -4,29 +4,28 @@ module test-import-module {
     prefix imp;
 
     organization
-      "";
+      "imported organization";
 
     contact
-      "";
+      "neoul@ymail.com";
 
     description
-      "";
+      "imported module";
 
     revision 2016-08-16 {
       description
-        "";
+        "Revision description";
       reference
-        "";
+        "0.0.1";
     }
 
     container importedcontainer {
     	description
-    		"";
+    		"Top container of imported-module";
     	leaf importedcontainerleaf {
     		type string;
-    	
     		description
-    			"";
+    			"imported container leaf.";
     	}
     }
 
@@ -34,15 +33,13 @@ module test-import-module {
     	container abc {
 	    	leaf apa {
     			type string;
-    		
     			description
-    				"";
+    				"apa leaf";
  		   	}	
 	    	leaf snorp {
     			type string;
-    		
     			description
-    				"";
+    				"snorp node";
  		   	}	
 		}
     }

@@ -5,14 +5,15 @@ module test-module {
 	import test-import-module {
 		prefix "imp";
 	}
+	include test-include-module;
 
 	organization "test-module organization";
 	contact "test-module contact";
 	description "test-module description";
 
 	revision 2015-05-30 {
-		description "initial";
-		reference "testing";
+		description "initial revision";
+		reference "testing 0.0.1";
 	}
 
 	typedef percent {
@@ -24,14 +25,15 @@ module test-module {
 
     typedef name {
         type string;
+		description "Name type";
     }
 
 	container topcontainer {
 		container simplecontainer {
-			description "";
+			description "The simple container in the top container.";
 			leaf simpleleaf {
 				type string;
-				description "";
+				description "The simple leaf of the simple container.";
 			}
 		}
 
@@ -138,7 +140,9 @@ module test-module {
 
 		container typetester {
 			leaf tint8 {
-				type int8;
+				type int8 {
+					range 1..10;
+				}
 			}
 			leaf tuint8 {
 				type uint8;
@@ -164,6 +168,7 @@ module test-module {
 		}
 
 		container acontainer {
+			config false;
 			description "";
 			container subcontainer {
 				description "";
