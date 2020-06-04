@@ -23,7 +23,7 @@ pyang -f excel --excel-model-name=TEST-MODEL --excel-model-ver=1.0 --excel-model
 xargs rm -rf < install-list.txt
 ```
 
-## Temp
+## Temp (Do not use.)
 
 ```bash
 python setup.py bdist_wheel
