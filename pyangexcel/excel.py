@@ -578,9 +578,9 @@ def get_flags_str(s):
     elif s.keyword == 'output':
         return ''
     elif s.i_config:
-        return 'ro'
-    else:
         return 'rw'
+    else:
+        return 'ro'
 
 def get_typename(s):
     t = s.search_one('type')
