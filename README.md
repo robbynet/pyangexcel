@@ -8,6 +8,9 @@ This is a pyang excel output plugin. It takes YANG files and tries to produce a 
 # Install
 python setup.py install --user --record install-list.txt
 
+# Or install it via pip, pip3
+pip install pyangexcel
+
 export PYANG_PLUGINPATH=`/usr/bin/env python -c \
 'import pyangexcel; import os; print ("{}".format(os.path.dirname(pyangexcel.__file__)))'`
 pyang -f excel --excel-model-name=TEST-MODEL --excel-model-ver=1.0 --excel-model-author=neoul@ymail.com --path=test test/test-module.yang
