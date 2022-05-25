@@ -427,10 +427,27 @@ def print_children(i_children, module, fd, prefix, path, ctx, level=0, exdata=No
         disabled_feature = False
         iffeature = ch.search('if-feature')
         for f in iffeature:
-            if f.arg not in ctx.features[module.arg]:
-                print (ch.search("feature"), ch.search('if-feature'), ctx.features[module.arg], "disabled feature")
-                # ignore disabled feature
-                disabled_feature = True
+            # find a feature in imported module [by robot]
+            if ":" in f.arg:
+                import_prefix, import_feature = util.split_identifier(f.arg)
+                if import_prefix is not None and import_feature is not None:
+                    import_pos = None
+                    import_err = []
+                    import_module = util.prefix_to_module(module, import_prefix, import_pos, import_err)
+                    if import_module is not None:
+                        if import_module in ctx.features and import_feature not in ctx.features[import_module.arg]:
+                            print (ch.search("feature"), ch.search('if-feature'), ctx.features[module.arg], "disabled feature")
+                            # ignore disabled feature
+                            disabled_feature = True
+            else:
+                if f.arg not in ctx.features[module.arg]:
+                    print (ch.search("feature"), ch.search('if-feature'), ctx.features[module.arg], "disabled feature")
+                    # ignore disabled feature
+                    disabled_feature = True
+#            if f.arg not in ctx.features[module.arg]:
+#                print (ch.search("feature"), ch.search('if-feature'), ctx.features[module.arg], "disabled feature")
+#                # ignore disabled feature
+#                disabled_feature = True
         if not disabled_feature:
             print_node(ch, module, fd, prefix, path, ctx, level, exdata=exdata)
 
