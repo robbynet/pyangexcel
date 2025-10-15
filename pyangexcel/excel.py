@@ -440,10 +440,15 @@ def print_children(i_children, module, fd, prefix, path, ctx, level=0, exdata=No
                             # ignore disabled feature
                             disabled_feature = True
             else:
-                if f.arg not in ctx.features[module.arg]:
-                    print (ch.search("feature"), ch.search('if-feature'), ctx.features[module.arg], "disabled feature")
+                # Fix: Automatically qualify feature with current module prefix if missing
+                qualified_feature = f.arg
+                # Get current module prefix
+                pr = module.search_one('prefix')
+                if pr is not None:
+                    qualified_feature = pr.arg + ":" + f.arg
+                    if qualified_feature not in ctx.features.get(module.arg, []):
                     # ignore disabled feature
-                    disabled_feature = True
+                         disabled_feature = True
 #            if f.arg not in ctx.features[module.arg]:
 #                print (ch.search("feature"), ch.search('if-feature'), ctx.features[module.arg], "disabled feature")
 #                # ignore disabled feature
