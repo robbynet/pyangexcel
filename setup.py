@@ -8,7 +8,7 @@ def read(fname):
 
 setup(
     name='pyangexcel',
-    version='0.4-alpha',
+    version='0.4-beta',
     description=('A pyang excel plugin to produce a Excel Schema file'),
     long_description=read('README.md'),
     long_description_content_type="text/markdown",
