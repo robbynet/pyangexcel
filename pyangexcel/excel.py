@@ -279,7 +279,9 @@ The %s YANG Data Model consists of a number of YANG data modules listed below ."
         data = get_namespace(modules)
         ex.write(title="%s YANG Data Module list" %modelname, data=data)
         ex.adjust()
-
+        # After loading modules and generating the "Brief"
+        if ctx.opts and hasattr(ctx.opts, 'excel_add_features') and ctx.opts.excel_add_features:
+            write_features_table(ex, modules)      
         for module in modules:
             data, max_depth = get_module_data(module, fd, ctx, path)
             # pprint.pprint(data)
@@ -718,3 +720,33 @@ def action_params(action):
             for o in outputs:
                 s += ' out: ' + o.arg + "\n"
     return s
+
+def write_features_table(ex, modules):
+    # Define the header columns
+    feature_headers = ["Feature", "Description", "Module", "Namespace", "Prefix"]
+    data_rows = [feature_headers]
+
+    # Loop through modules and find features
+    for module in modules:
+        module_name = module.arg
+        module_ns = ""
+        module_prefix = ""
+        ns_tag = module.search_one('namespace')
+        if ns_tag:
+            module_ns = ns_tag.arg
+        pr_tag = module.search_one('prefix')
+        if pr_tag:
+            module_prefix = pr_tag.arg
+
+        # Find features in the module
+        for feature in module.search('feature'):
+            feature_name = feature.arg
+            desc_tag = feature.search_one('description')
+            description = desc_tag.arg if desc_tag else ""
+            # Add feature row
+            data_rows.append([feature_name, description, module_name, module_ns, module_prefix])
+
+    # Write the "features" sheet
+    ex.sheet(sheetname="features", sheettitle="Features List")
+    ex.write(data=data_rows)
+    ex.adjust()
