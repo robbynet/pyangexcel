@@ -8,13 +8,13 @@ def read(fname):
 
 setup(
     name='pyangexcel',
-    version='0.3',
+    version='0.4-alpha',
     description=('A pyang excel plugin to produce a Excel Schema file'),
     long_description=read('README.md'),
     long_description_content_type="text/markdown",
     packages=['pyangexcel'],
-    author='neoul',
-    author_email='neoul@ymail.com',
+    author='robbynet',
+    author_email='christian.gouret@nokia.com',
     license='Apache License',
     url='https://github.com/neoul/pyangexcel',
     install_requires=['pyang', 'openpyxl'],
