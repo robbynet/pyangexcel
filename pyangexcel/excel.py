@@ -246,6 +246,9 @@ class ExcelPlugin(plugin.PyangPlugin):
             optparse.make_option("--excel-model-author",
                                  dest="excel_model_author",
                                  help="The model author of the excel"),
+            optparse.make_option("--excel-add-features",
+                                 dest="excel-add-features",
+                                 help="Include a features list table in the Excel output"),
             ]
 
         g = optparser.add_option_group("Excel output specific options")
